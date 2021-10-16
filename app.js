@@ -10,6 +10,7 @@
   const screenOperand = document.querySelector('#screen-operand');
   const clearButton = document.querySelector('#clear');
   const deleteButton = document.querySelector('#delete');
+  const posNegButton = document.querySelector('#pos-neg');
   const operandButtons = document.querySelectorAll('.operand');
   const operatorButtons = document.querySelectorAll('.operator');
   const decimalButton = document.querySelector('#decimal');
@@ -82,6 +83,10 @@
     return x / y;
   }
 
+  function posNegMultiple() {
+    if (currentOperand) currentOperand = (currentOperand * -1).toString();
+  }
+
   function operate() {
     if (firstOperand && currentOperand) {
       let x = parseFloat(firstOperand);
@@ -144,6 +149,7 @@
     document.addEventListener('keydown', (evt) => { keyHandler(evt.key); updateScreen(); });
     clearButton.addEventListener('click', () => { clearMemory(); updateScreen(); });
     deleteButton.addEventListener('click', () => { deleteLastValue(); updateScreen(); });
+    posNegButton.addEventListener('click', () => { posNegMultiple(); updateScreen(); });
     decimalButton.addEventListener('click', () => { addDecimal(); updateScreen() });
     equalButton.addEventListener('click', () => { operate(); updateScreen(); });
 
