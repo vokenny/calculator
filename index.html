@@ -21,7 +21,10 @@
     <main>
       <section id="calc-container">
         <div id="calc">
-          <div id="screen"></div>
+          <div id="screen">
+            <div id="screen-calc"></div>
+            <div id="screen-operand"></div>
+          </div>
 
           <div class="row">
             <button id="clear" class="button action" value="clear">
@@ -36,34 +39,28 @@
             <button id="7" class="button operand" value="7">7</button>
             <button id="8" class="button operand" value="8">8</button>
             <button id="9" class="button operand" value="9">9</button>
-            <button id="divide" class="button operator" value="divide">
-              ÷
-            </button>
+            <button id="divide" class="button operator" value="÷">÷</button>
           </div>
 
           <div class="row">
             <button id="4" class="button operand" value="4">4</button>
             <button id="5" class="button operand" value="5">5</button>
             <button id="6" class="button operand" value="6">6</button>
-            <button id="multi" class="button operator" value="multi">x</button>
+            <button id="multi" class="button operator" value="x">x</button>
           </div>
 
           <div class="row">
             <button id="1" class="button operand" value="1">1</button>
             <button id="2" class="button operand" value="2">2</button>
             <button id="3" class="button operand" value="3">3</button>
-            <button id="subtract" class="button operator" value="subtract">
-              -
-            </button>
+            <button id="subtract" class="button operator" value="-">-</button>
           </div>
 
           <div class="row">
             <button id="0" class="button operand" value="0">0</button>
-            <button id="decimal" class="button operator" value="decimal">
-              .
-            </button>
-            <button id="equal" class="button operator" value="equal">=</button>
-            <button id="add" class="button operator" value="add">+</button>
+            <button id="decimal" class="button" value=".">.</button>
+            <button id="equal" class="button" value="=">=</button>
+            <button id="add" class="button operator" value="+">+</button>
           </div>
         </div>
       </section>
