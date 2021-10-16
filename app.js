@@ -30,7 +30,7 @@
   }
 
   function addOperand(value) {
-    if (currentOperand.length < 15) {
+    if (currentOperand.length < 12) {
       // Disallow leading zeros
       if (currentOperand != '0') currentOperand += value
       else currentOperand = value;
@@ -59,38 +59,52 @@
     if (firstOperand && currentOperand) operate();
 
     // Update operator to latest one, to continue chain of calculations
-    operator = value;
+    // Unless chain has been interrupted by a division of zero
+    if (!infinityMsgToggle) operator = value;
+  }
+
+  function formatOperand() {
+    if (firstOperand != INFINITY_MSG) {
+      // Round to 8 decimal places
+      firstOperand = (Math.round(firstOperand * 100000000) / 100000000).toString();
+    }
+  }
+
+  const add = (x, y) => x + y;
+  const subtract = (x, y) => x - y;
+  const multiply = (x, y) => x * y;
+  const divide = (x, y) => {
+    if (y === 0) {
+      infinityMsgToggle = true;
+      return INFINITY_MSG
+    }
+
+    return x / y;
   }
 
   function operate() {
     if (firstOperand && currentOperand) {
-      let result = 0.0;
+      let x = parseFloat(firstOperand);
+      let y = parseFloat(currentOperand);
 
       switch (operator) {
         case '+':
-          result = parseFloat(firstOperand) + parseFloat(currentOperand);
+          firstOperand = add(x, y);
           break;
         case '-':
-          result = parseFloat(firstOperand) - parseFloat(currentOperand);
+          firstOperand = subtract(x, y);
           break;
         case 'x':
-          result = parseFloat(firstOperand) * parseFloat(currentOperand);
+          firstOperand = multiply(x, y);
           break;
         case '÷':
-          currentOperand === '0'
-            ? handleInfinity()
-            : result = parseFloat(firstOperand) / parseFloat(currentOperand);
+          firstOperand = divide(x, y);
           break;
       }
 
-      firstOperand = result.toString();
+      formatOperand();
       clearCalc();
     }
-  }
-
-  function handleInfinity() {
-    infinityMsgToggle = true;
-    firstOperand = INFINITY_MSG;
   }
 
   function updateScreen() {
@@ -119,28 +133,15 @@
   }
 
   function keyHandler(key) {
-    switch (true) {
-      case !isNaN(parseInt(key)):
-        addOperand(key);
-        break;
-      case OPERATORS.includes(key):
-        updateOperator(key);
-        break;
-      case key === '.':
-        addDecimal();
-        break;
-      case key === 'Enter':
-      case key === '=':
-        operate();
-        break;
-      case key === 'Backspace':
-        deleteLastValue();
-        break;
-    }
+    if (!isNaN(parseInt(key))) addOperand(key);
+    if (OPERATORS.includes(key)) updateOperator(key);
+    if (key === '.') addDecimal();
+    if (key === 'Enter' || key === '=') operate();
+    if (key === 'Backspace') deleteLastValue();
   }
 
   function addCalcEventListeners() {
-    document.addEventListener('keydown', (evt) => { keyHandler(evt.key); updateScreen(); })
+    document.addEventListener('keydown', (evt) => { keyHandler(evt.key); updateScreen(); });
     clearButton.addEventListener('click', () => { clearMemory(); updateScreen(); });
     deleteButton.addEventListener('click', () => { deleteLastValue(); updateScreen(); });
     decimalButton.addEventListener('click', () => { addDecimal(); updateScreen() });
