@@ -20,7 +20,7 @@
     if (currentOperand.length < 15) currentOperand += evt.target.value;
   }
 
-  function addOperator(evt) {
+  function updateOperator(evt) {
     if (!firstOperand) firstOperand = currentOperand;
 
     currentOperand = '';
@@ -81,7 +81,7 @@
 
     operatorButtons.forEach(operator =>
       operator.addEventListener('click', (evt) => {
-        addOperator(evt);
+        updateOperator(evt);
         updateScreen();
       }));
   }
