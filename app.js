@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
+  /* CONSTANTS */
   const INFINITY_MSG = 'We don\'t do that here';
+  const OPERATORS = ['+', '-', '/', '*'];
 
   /* DOCUMENT SELECTORS */
   const screenCalc = document.querySelector('#screen-calc');
@@ -27,9 +29,7 @@
     if (!hasDecimal()) currentOperand += '.';
   }
 
-  function addOperand(evt) {
-    const value = evt.target.value;
-
+  function addOperand(value) {
     // Disallow leading zeros
     if (currentOperand != '0' && currentOperand.length < 15) {
       currentOperand += value
@@ -46,7 +46,7 @@
     currentOperand = parseFloat(operand).toString();
   }
 
-  function updateOperator(evt) {
+  function updateOperator(value) {
     if (currentOperand) sanitiseOperand();
 
     if (!firstOperand) {
@@ -58,7 +58,7 @@
     if (firstOperand && currentOperand) operate();
 
     // Update operator to latest one, to continue chain of calculations
-    operator = evt.target.value;
+    operator = value;
   }
 
   function operate() {
@@ -117,7 +117,29 @@
     currentOperand = currentOperand.slice(0, -1);
   }
 
+  function keyHandler(key) {
+    switch (true) {
+      case !isNaN(parseInt(key)):
+        addOperand(key);
+        break;
+      case OPERATORS.includes(key):
+        updateOperator(key);
+        break;
+      case key === '.':
+        addDecimal();
+        break;
+      case key === 'Enter':
+      case key === '=':
+        operate();
+        break;
+      case key === 'Backspace':
+        deleteLastValue();
+        break;
+    }
+  }
+
   function addCalcEventListeners() {
+    document.addEventListener('keydown', (evt) => { keyHandler(evt.key); updateScreen(); })
     clearButton.addEventListener('click', () => { clearMemory(); updateScreen(); });
     deleteButton.addEventListener('click', () => { deleteLastValue(); updateScreen(); });
     decimalButton.addEventListener('click', () => { addDecimal(); updateScreen() });
@@ -125,13 +147,13 @@
 
     operandButtons.forEach(operand =>
       operand.addEventListener('click', (evt) => {
-        addOperand(evt);
+        addOperand(evt.target.value);
         updateScreen();
       }));
 
     operatorButtons.forEach(operator =>
       operator.addEventListener('click', (evt) => {
-        updateOperator(evt);
+        updateOperator(evt.target.value);
         updateScreen();
       }));
   }
