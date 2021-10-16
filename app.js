@@ -30,10 +30,11 @@
   }
 
   function addOperand(value) {
-    // Disallow leading zeros
-    if (currentOperand != '0' && currentOperand.length < 15) {
-      currentOperand += value
-    } else currentOperand = value;
+    if (currentOperand.length < 15) {
+      // Disallow leading zeros
+      if (currentOperand != '0') currentOperand += value
+      else currentOperand = value;
+    }
   }
 
   function sanitiseOperand() {
