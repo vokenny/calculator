@@ -10,6 +10,7 @@
   const deleteButton = document.querySelector('#delete');
   const operandButtons = document.querySelectorAll('.operand');
   const operatorButtons = document.querySelectorAll('.operator');
+  const decimalButton = document.querySelector('#decimal');
   const equalButton = document.querySelector('#equal');
 
   let firstOperand = '';
@@ -18,12 +19,35 @@
   let infinityMsgToggle = false;
 
   const getCurrentCalc = () => operator ? firstOperand + ' ' + operator : firstOperand;
+  const hasDecimal = () => currentOperand.includes('.');
+
+  function addDecimal() {
+    // Only add decimal when there isn't already one
+    if (!hasDecimal()) currentOperand += '.';
+  }
 
   function addOperand(evt) {
-    if (currentOperand.length < 15) currentOperand += evt.target.value;
+    const value = evt.target.value;
+
+    // Disallow leading zeros
+    if (currentOperand != '0' && currentOperand.length < 15) {
+      currentOperand += value
+    } else currentOperand = value;
+  }
+
+  function sanitiseOperand() {
+    // Remove trailing decimal
+    let operand = currentOperand.substr(currentOperand.length - 1) === '.'
+      ? currentOperand.slice(0, -1)
+      : currentOperand;
+
+    // Remove trailing zeros
+    currentOperand = parseFloat(operand).toString();
   }
 
   function updateOperator(evt) {
+    sanitiseOperand();
+
     if (!firstOperand) firstOperand = currentOperand;
 
     currentOperand = '';
@@ -86,6 +110,7 @@
   function addCalcEventListeners() {
     clearButton.addEventListener('click', () => { clearMemory(); updateScreen(); });
     deleteButton.addEventListener('click', () => { deleteLastValue(); updateScreen(); });
+    decimalButton.addEventListener('click', () => { addDecimal(); updateScreen() });
     equalButton.addEventListener('click', () => { operate(); updateScreen(); });
 
     operandButtons.forEach(operand =>
