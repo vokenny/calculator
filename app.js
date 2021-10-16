@@ -1,6 +1,8 @@
 (function () {
   'use strict';
 
+  const INFINITY_MSG = 'We don\'t do that here';
+
   /* DOCUMENT SELECTORS */
   const screenCalc = document.querySelector('#screen-calc');
   const screenOperand = document.querySelector('#screen-operand');
@@ -13,6 +15,7 @@
   let firstOperand = '';
   let operator = '';
   let currentOperand = '';
+  let infinityMsgToggle = false;
 
   const getCurrentCalc = () => operator ? firstOperand + ' ' + operator : firstOperand;
 
@@ -40,7 +43,9 @@
           firstOperand = parseFloat(firstOperand) * parseFloat(currentOperand);
           break;
         case '÷':
-          firstOperand = parseFloat(firstOperand) / parseFloat(currentOperand);
+          currentOperand === '0'
+            ? handleInfinity()
+            : firstOperand = parseFloat(firstOperand) / parseFloat(currentOperand);
           break;
       }
 
@@ -48,9 +53,19 @@
     }
   }
 
+  function handleInfinity() {
+    infinityMsgToggle = true;
+    firstOperand = INFINITY_MSG;
+  }
+
   function updateScreen() {
     screenCalc.textContent = getCurrentCalc();
     screenOperand.textContent = currentOperand;
+
+    if (infinityMsgToggle) {
+      clearMemory();
+      infinityMsgToggle = false;
+    }
   }
 
   function clearMemory() {
