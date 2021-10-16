@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 12px;
+}
+
+body {
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+#calc-container {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  height: 80vh;
+  width: auto;
+}
+
+#calc {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  aspect-ratio: auto 0.6 / 1;
+  min-width: 325px;
+  max-width: 800px;
+  padding: 20px;
+}
+
+#screen {
+  height: 18%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 5px;
+}
+
+.button {
+  font-size: 1.4em;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 100%;
+  margin: 10px;
+  max-width: 80px;
+  outline: 1px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 5px;
+}
+
+.button.operator {
+  background: rgba(0, 153, 255, 0.4);
+  font-weight: 600;
+}
+
+.button.action {
+  background: rgba(255, 123, 0, 0.4);
+}
+
+.button:hover {
+  outline: 1px solid rgba(255, 255, 255, 1);
+  outline-offset: 3px;
+}
