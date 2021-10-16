@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Share Tech Mono', monospace;
 }
 
 html {
@@ -28,7 +29,7 @@ body {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-radius: 10px;
+  border-radius: 15px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   height: 80vh;
   width: auto;
@@ -45,10 +46,15 @@ body {
 }
 
 #screen {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  font-size: 2.5em;
   height: 18%;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 8px;
+  padding: 10px;
 }
 
 .row {
@@ -59,7 +65,7 @@ body {
 }
 
 .button {
-  font-size: 1.4em;
+  font-size: 1.8em;
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(10px);
@@ -68,7 +74,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.18);
   width: 100%;
   margin: 10px;
-  max-width: 80px;
   outline: 1px solid rgba(255, 255, 255, 0.3);
   outline-offset: 5px;
 }

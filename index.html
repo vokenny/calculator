@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="./styles.css" />
     <script defer src="./app.js"></script>
 
@@ -17,36 +24,46 @@
           <div id="screen"></div>
 
           <div class="row">
-            <button id="clear" class="button action">Clear</button>
-            <button id="delete" class="button action">Delete</button>
+            <button id="clear" class="button action" value="clear">
+              Clear
+            </button>
+            <button id="delete" class="button action" value="delete">
+              Delete
+            </button>
           </div>
 
           <div class="row">
-            <button id="7" class="button">7</button>
-            <button id="8" class="button">8</button>
-            <button id="9" class="button">9</button>
-            <button id="divide" class="button operator">÷</button>
+            <button id="7" class="button operand" value="7">7</button>
+            <button id="8" class="button operand" value="8">8</button>
+            <button id="9" class="button operand" value="9">9</button>
+            <button id="divide" class="button operator" value="divide">
+              ÷
+            </button>
           </div>
 
           <div class="row">
-            <button id="4" class="button">4</button>
-            <button id="5" class="button">5</button>
-            <button id="6" class="button">6</button>
-            <button id="multi" class="button operator">x</button>
+            <button id="4" class="button operand" value="4">4</button>
+            <button id="5" class="button operand" value="5">5</button>
+            <button id="6" class="button operand" value="6">6</button>
+            <button id="multi" class="button operator" value="multi">x</button>
           </div>
 
           <div class="row">
-            <button id="1" class="button">1</button>
-            <button id="2" class="button">2</button>
-            <button id="3" class="button">3</button>
-            <button id="subtract" class="button operator">-</button>
+            <button id="1" class="button operand" value="1">1</button>
+            <button id="2" class="button operand" value="2">2</button>
+            <button id="3" class="button operand" value="3">3</button>
+            <button id="subtract" class="button operator" value="subtract">
+              -
+            </button>
           </div>
 
           <div class="row">
-            <button id="0" class="button">0</button>
-            <button id="decimal" class="button operator">.</button>
-            <button id="equal" class="button operator">=</button>
-            <button id="add" class="button operator">+</button>
+            <button id="0" class="button operand" value="0">0</button>
+            <button id="decimal" class="button operator" value="decimal">
+              .
+            </button>
+            <button id="equal" class="button operator" value="equal">=</button>
+            <button id="add" class="button operator" value="add">+</button>
           </div>
         </div>
       </section>
