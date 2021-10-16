@@ -13,6 +13,7 @@
   const decimalButton = document.querySelector('#decimal');
   const equalButton = document.querySelector('#equal');
 
+  /*  CALCULATOR STATE */
   let firstOperand = '';
   let operator = '';
   let currentOperand = '';
@@ -46,33 +47,42 @@
   }
 
   function updateOperator(evt) {
-    sanitiseOperand();
+    if (currentOperand) sanitiseOperand();
 
-    if (!firstOperand) firstOperand = currentOperand;
+    if (!firstOperand) {
+      firstOperand = currentOperand;
+      currentOperand = '';
+    }
 
-    currentOperand = '';
+    // Perform calculation if both are defined
+    if (firstOperand && currentOperand) operate();
+
+    // Update operator to latest one, to continue chain of calculations
     operator = evt.target.value;
   }
 
   function operate() {
     if (firstOperand && currentOperand) {
+      let result = 0.0;
+
       switch (operator) {
         case '+':
-          firstOperand = parseFloat(firstOperand) + parseFloat(currentOperand);
+          result = parseFloat(firstOperand) + parseFloat(currentOperand);
           break;
         case '-':
-          firstOperand = parseFloat(firstOperand) - parseFloat(currentOperand);
+          result = parseFloat(firstOperand) - parseFloat(currentOperand);
           break;
         case 'x':
-          firstOperand = parseFloat(firstOperand) * parseFloat(currentOperand);
+          result = parseFloat(firstOperand) * parseFloat(currentOperand);
           break;
         case '÷':
           currentOperand === '0'
             ? handleInfinity()
-            : firstOperand = parseFloat(firstOperand) / parseFloat(currentOperand);
+            : result = parseFloat(firstOperand) / parseFloat(currentOperand);
           break;
       }
 
+      firstOperand = result.toString();
       clearCalc();
     }
   }
