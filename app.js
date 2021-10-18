@@ -3,7 +3,7 @@
 
   /* CONSTANTS */
   const INFINITY_MSG = 'We don\'t do that here';
-  const OPERATORS = ['+', '-', '/', '*'];
+  const OPERATORS = ['+', '-', 'x', '*', '/'];
 
   /* DOCUMENT SELECTORS */
   const screenCalc = document.querySelector('#screen-calc');
@@ -105,9 +105,11 @@
           firstOperand = subtract(x, y);
           break;
         case 'x':
+        case '*':
           firstOperand = multiply(x, y);
           break;
         case '÷':
+        case '/':
           firstOperand = divide(x, y);
           break;
       }
