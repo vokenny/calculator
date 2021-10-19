@@ -66,12 +66,12 @@
 
   function formatOperand() {
     if (firstOperand != INFINITY_MSG) {
-      // Round to 5 decimal places if it has more than 5 
-      let operand = Math.round(firstOperand * 100000) / 100000;
+      // Round to 5 decimal places
+      firstOperand = Math.round(firstOperand * 100000) / 100000;
 
       // Use exponential notation if length is > 12
-      if (operand.toString().length > 12) {
-        firstOperand = operand.toExponential(2).toString();
+      if (firstOperand.toString().length > 12) {
+        firstOperand = firstOperand.toExponential(3).toString();
       }
     }
   }
