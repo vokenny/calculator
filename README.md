@@ -1,4 +1,4 @@
-# top-calculator
+# calculator
 
 The Odin Project Frontend Foundations: Project Calculator
 
